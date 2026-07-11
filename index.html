@@ -8,44 +8,32 @@
 <meta name="apple-mobile-web-app-title" content="NBL1 Stats">
 <title>NBL1 Stats</title>
 <style>
-:root {
-  --navy:#1A2744; --navy-light:#3D5494;
-  --accent:#E8A020; --red:#D94040; --green:#2E8B57;
-  --bg:#0F1B36; --surface:#1C2D50; --surface2:#243660;
-  --border:rgba(255,255,255,0.08); --border2:rgba(255,255,255,0.14);
-  --text:#F0F4FF; --dim:rgba(240,244,255,0.55); --faint:rgba(240,244,255,0.3);
-}
+:root{--navy:#1A2744;--navy-light:#3D5494;--accent:#E8A020;--red:#D94040;--green:#2E8B57;--bg:#0F1B36;--surface:#1C2D50;--surface2:#243660;--border:rgba(255,255,255,0.08);--border2:rgba(255,255,255,0.14);--text:#F0F4FF;--dim:rgba(240,244,255,0.55);--faint:rgba(240,244,255,0.3)}
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--text);font-family:system-ui,sans-serif}
 #app{display:flex;flex-direction:column;height:100dvh}
-/* Header */
 .hdr{background:var(--navy);padding:env(safe-area-inset-top,12px) 14px 0}
 .hdr-row{display:flex;align-items:center;justify-content:space-between;padding-bottom:8px}
 .hdr-title{font-size:13px;font-weight:600;letter-spacing:2px;color:var(--accent)}
-.hdr-btn{font-size:12px;color:var(--dim);border:0.5px solid var(--border2);border-radius:8px;padding:5px 10px;background:transparent;cursor:pointer;color:var(--dim)}
+.hdr-btn{font-size:12px;color:var(--dim);border:0.5px solid var(--border2);border-radius:8px;padding:5px 10px;background:transparent;cursor:pointer}
 .qbar{display:flex;gap:5px;padding-bottom:10px}
 .qbtn{flex:1;height:34px;border:1px solid var(--border2);border-radius:9px;background:transparent;color:var(--dim);font-size:13px;cursor:pointer}
 .qbtn.on{background:var(--accent);border-color:var(--accent);color:var(--navy);font-weight:600}
-/* Nav */
 .nav{display:flex;border-top:0.5px solid var(--border);background:var(--navy)}
 .nbtn{flex:1;height:50px;border:none;background:transparent;color:var(--faint);font-size:11px;font-weight:500;cursor:pointer;border-bottom:2px solid transparent;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px}
 .nbtn.on{color:var(--accent);border-bottom-color:var(--accent)}
-/* Content */
 .content{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:12px}
-/* Labels */
 .lbl{font-size:10px;letter-spacing:1.5px;color:var(--faint);text-transform:uppercase;margin-bottom:8px}
-/* Court strip */
+.cat-lbl{font-size:10px;font-weight:500;letter-spacing:1px;text-transform:uppercase;color:var(--accent);margin:10px 0 6px 2px}
 .court{background:var(--surface);border:0.5px solid var(--border2);border-radius:14px;padding:10px 12px;margin-bottom:12px}
-.court-row{display:flex;gap:6px;margin-bottom:0}
+.court-row{display:flex;gap:6px}
 .slot{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer}
 .slot-num{width:38px;height:38px;border-radius:50%;background:var(--navy-light);border:2px solid var(--accent);font-size:13px;font-weight:600;color:var(--accent);display:flex;align-items:center;justify-content:center}
 .slot-name{font-size:9px;color:var(--dim);text-align:center;max-width:50px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .slot-arr{font-size:10px;color:var(--faint)}
-/* Player stat rows in court */
 .prow{margin-top:10px;padding-top:10px;border-top:0.5px solid var(--border)}
 .prow-name{font-size:11px;color:var(--dim);margin-bottom:5px}
 .prow-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:4px}
-/* Mini counter */
 .mstat{display:flex;flex-direction:column;align-items:center;gap:3px}
 .mlbl{font-size:9px;color:var(--faint);text-align:center}
 .mctr{display:flex;align-items:center;border:0.5px solid var(--border2);border-radius:7px;overflow:hidden;width:100%}
@@ -53,22 +41,19 @@ html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--text);fon
 .mbtn:active{background:var(--accent);color:var(--navy)}
 .mval{flex:1;text-align:center;font-size:14px;font-weight:600;color:var(--text)}
 .red{color:var(--red)!important}
-/* Stat grid */
-.sgrid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px}
+.sgrid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:4px}
 .scard{background:var(--surface);border:0.5px solid var(--border2);border-radius:14px;padding:10px 12px;display:flex;flex-direction:column;gap:7px}
 .sname{font-size:12px;color:var(--dim);min-height:28px;display:flex;align-items:flex-start}
 .ctr{display:flex;align-items:center;border:0.5px solid var(--border2);border-radius:10px;overflow:hidden}
 .cbtn{flex:0 0 44px;height:44px;border:none;background:var(--surface2);color:var(--text);font-size:22px;cursor:pointer;display:flex;align-items:center;justify-content:center}
 .cbtn:active{background:var(--accent);color:var(--navy)}
 .cval{flex:1;text-align:center;font-size:24px;font-weight:600;color:var(--text)}
-/* Player cards (bench/all players tab) */
 .pcard{background:var(--surface);border:0.5px solid var(--border2);border-radius:14px;padding:10px 12px;margin-bottom:8px}
 .pcard-hdr{display:flex;align-items:center;gap:8px;margin-bottom:8px}
 .pnum{width:30px;height:30px;border-radius:50%;background:var(--navy-light);font-size:12px;font-weight:600;color:var(--accent);display:flex;align-items:center;justify-content:center;flex-shrink:0}
 .pnum.on{border:2px solid var(--accent)}
 .pname{font-size:14px;font-weight:500;flex:1}
 .on-tag{font-size:10px;color:var(--green)}
-/* Summary table */
 .twrap{overflow-x:auto;border-radius:12px;border:0.5px solid var(--border2);margin-bottom:12px}
 .stbl{width:100%;border-collapse:collapse;font-size:12px}
 .stbl th{background:var(--surface2);padding:7px 8px;color:var(--dim);font-size:10px;white-space:nowrap;border-bottom:0.5px solid var(--border2);text-align:center}
@@ -78,7 +63,6 @@ html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--text);fon
 .stbl tr:last-child td{border-bottom:none}
 .ttotal{color:var(--accent);font-weight:600}
 .tdiv td{background:var(--navy);color:var(--accent)!important;font-size:10px;letter-spacing:1px;text-align:left!important;padding:5px 8px}
-/* Overlays */
 .ov{position:fixed;inset:0;background:rgba(10,15,30,0.96);z-index:100;display:flex;flex-direction:column;padding:env(safe-area-inset-top,44px) 16px env(safe-area-inset-bottom,16px)}
 .ov h2{font-size:12px;letter-spacing:2px;color:var(--accent);margin-bottom:6px;font-weight:600}
 .ov-sub{font-size:12px;color:var(--dim);margin-bottom:14px}
@@ -90,7 +74,6 @@ html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--text);fon
 .pick-name{font-size:15px;font-weight:500;flex:1}
 .pick-tag{font-size:11px;color:var(--green)}
 .cancel-btn{margin-top:10px;padding:13px;background:transparent;border:0.5px solid var(--border2);border-radius:12px;color:var(--dim);font-size:15px;cursor:pointer}
-/* Setup */
 .sov{position:fixed;inset:0;background:rgba(10,15,30,0.96);z-index:100;display:flex;flex-direction:column;overflow-y:auto;padding:env(safe-area-inset-top,44px) 16px env(safe-area-inset-bottom,16px)}
 .sov h2{font-size:12px;letter-spacing:2px;color:var(--accent);margin-bottom:18px;font-weight:600}
 .sg{margin-bottom:18px}
@@ -101,14 +84,12 @@ html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--text);fon
 .nbadge{width:32px;height:32px;border-radius:50%;background:var(--navy-light);color:var(--accent);font-size:12px;font-weight:600;display:flex;align-items:center;justify-content:center;flex-shrink:0}
 .prow2 input{flex:1;background:var(--surface);border:0.5px solid var(--border2);border-radius:10px;padding:8px 12px;color:var(--text);font-size:14px}
 .done-btn{width:100%;padding:14px;background:var(--accent);color:var(--navy);border:none;border-radius:14px;font-size:16px;font-weight:600;cursor:pointer;margin-top:10px}
-/* Export */
 .eov{position:fixed;inset:0;background:rgba(10,15,30,0.96);z-index:200;display:flex;flex-direction:column;padding:env(safe-area-inset-top,44px) 16px env(safe-area-inset-bottom,16px)}
 .eov-hdr{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
 .eov-hdr span{font-size:11px;letter-spacing:2px;color:var(--accent);font-weight:600}
 .eov textarea{flex:1;background:var(--surface);border:0.5px solid var(--border2);border-radius:12px;color:var(--text);font-size:11px;padding:12px;resize:none;line-height:1.6}
 .close-btn{background:transparent;border:0.5px solid var(--border2);border-radius:8px;color:var(--text);padding:6px 14px;font-size:13px;cursor:pointer}
 .copy-btn{margin-top:10px;padding:14px;background:var(--accent);border:none;border-radius:12px;color:var(--navy);font-size:15px;font-weight:600;cursor:pointer}
-/* Bottom */
 .bot{padding:10px 12px env(safe-area-inset-bottom,10px);background:var(--navy);border-top:0.5px solid var(--border);display:flex;gap:8px}
 .rbtn{flex:1;padding:11px;background:transparent;border:0.5px solid var(--border2);border-radius:12px;color:var(--dim);font-size:13px;cursor:pointer}
 .ebtn{flex:2;padding:11px;background:var(--accent);border:none;border-radius:12px;color:var(--navy);font-size:14px;font-weight:600;cursor:pointer}
@@ -126,20 +107,16 @@ html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--text);fon
   </div>
   <nav class="nav">
     <button class="nbtn on" id="nb-offense">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v8M8 12h8"/></svg>
-      Offense
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v8M8 12h8"/></svg>Offense
     </button>
     <button class="nbtn" id="nb-defense">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-      Defense
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Defense
     </button>
     <button class="nbtn" id="nb-players">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="7" r="4"/><path d="M3 21v-2a4 4 0 014-4h4"/><circle cx="17" cy="17" r="3"/><path d="M17 14v6M14 17h6"/></svg>
-      Players
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="7" r="4"/><path d="M3 21v-2a4 4 0 014-4h4"/><circle cx="17" cy="17" r="3"/><path d="M17 14v6M14 17h6"/></svg>Players
     </button>
     <button class="nbtn" id="nb-summary">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
-      Summary
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>Summary
     </button>
   </nav>
   <div class="content" id="content"></div>
@@ -148,16 +125,12 @@ html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--text);fon
     <button class="ebtn" id="exportBtn">Export ↗</button>
   </div>
 </div>
-
-<!-- Sub overlay -->
 <div class="ov hidden" id="subOv">
   <h2>SUBSTITUTION</h2>
   <div class="ov-sub" id="subSub"></div>
   <div class="pick-list" id="pickList"></div>
   <button class="cancel-btn" id="cancelSub">Cancel</button>
 </div>
-
-<!-- Setup overlay -->
 <div class="sov hidden" id="setupOv">
   <h2>TEAM SETUP</h2>
   <div class="sg"><label>OUR TEAM</label><input type="text" id="teamName" placeholder="Team name"></div>
@@ -165,8 +138,6 @@ html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--text);fon
   <div class="sg"><label>ROSTER</label><div class="pgrid" id="pgrid"></div></div>
   <button class="done-btn" id="doneSetup">Done</button>
 </div>
-
-<!-- Export overlay -->
 <div class="eov hidden" id="exportOv">
   <div class="eov-hdr">
     <span>EXPORT — COPY &amp; PASTE</span>
@@ -177,365 +148,306 @@ html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--text);fon
 </div>
 
 <script>
-// ── Data ──────────────────────────────────────────────
-var PLAYERS = [
-  {num:1},{num:4},{num:6},{num:8},{num:9},
-  {num:10},{num:11},{num:14},{num:16},{num:17},
-  {num:25},{num:40}
-];
-var OFF = [
-  {k:'paintTouch',l:'Paint Touches'},{k:'transOpp',l:'Transition Opp'},
-  {k:'transScore',l:'Transition Score'},{k:'oreb',l:'OREB'},
-  {k:'secondChance',l:'2nd Chance Pts'},{k:'paintScore',l:'Paint Score'},
-  {k:'open3Att',l:'Open 3 Att'},{k:'open3Made',l:'Open 3 Made'},
-  {k:'forcedTO',l:'Forced TO'},{k:'stops',l:'Stops'}
-];
-var DEF = [
-  {k:'oppTransOpp',l:'Opp Trans Opp'},{k:'oppTransPts',l:'Opp Trans Pts'},
-  {k:'oppOreb',l:'Opp OREB'},{k:'opp2nd',l:'Opp 2nd Chance'},
-  {k:'oppPaintPts',l:'Opp Paint Pts'},{k:'missedBox',l:'Missed Boxouts'},
-  {k:'oppOpen3Att',l:'Opp Open 3 Att'},{k:'oppOpen3Made',l:'Opp Open 3 Made'}
-];
-var PSTATS = [
-  {k:'fouls',l:'Fouls'},{k:'boxout',l:'Boxout'},
-  {k:'ballTouch',l:'Ball Touch'},{k:'trans',l:'Trans'}
-];
-var NAMES = {
-  1:'Taylah Levy',4:'Grace Blackwood',6:'Sally Faehrmann',
-  8:'Maja Peric',9:'Isabella De Jesus',10:'Jennifer Mailei',
-  11:'Ai Matsumoto',14:'Llianna Jacob',16:'Seehia Ridard',
-  17:'Alana Dalgleish',25:'Mizuki Wakamatsu',40:'Lahoi-Roi Igiraneza'
-};
+var PLAYERS=[{num:1},{num:4},{num:6},{num:8},{num:9},{num:10},{num:11},{num:14},{num:17},{num:18},{num:25},{num:40},{num:44}];
 
-var Q = 1;
-var TAB = 'offense';
-var onCourt = [1,4,6,8,9];
-var subSlot = -1;
-var resetConfirm = false;
+var OFF=[
+  {k:'transOpp',l:'Transition Opp',cat:'Transition'},
+  {k:'transScore',l:'Transition Score',cat:'Transition'},
+  {k:'paintTouch',l:'Paint Touches',cat:'Paint'},
+  {k:'paintScore',l:'Paint Score',cat:'Paint'},
+  {k:'secondChance',l:'2nd Chance Pts',cat:'Paint'},
+  {k:'oreb',l:'OREB',cat:'Paint'},
+  {k:'open3Att',l:'Open 3 Att',cat:'3-Point'},
+  {k:'open3Made',l:'Open 3 Made',cat:'3-Point'},
+  {k:'forcedTO',l:'Forced TO',cat:'Player'},
+  {k:'fouls',l:'Fouls',cat:'Player'},
+  {k:'ballTouch',l:'Ball Touch',cat:'Player'}
+];
 
-var teamData = {};
-var playerData = {};
-for (var q = 1; q <= 5; q++) {
-  teamData[q] = {};
-  OFF.concat(DEF).forEach(function(s){ teamData[q][s.k] = 0; });
-  playerData[q] = {};
+var DEF=[
+  {k:'oppTransOpp',l:'Opp Trans Opp',cat:'Transition'},
+  {k:'oppTransPts',l:'Opp Trans Pts',cat:'Transition'},
+  {k:'oppOreb',l:'Opp OREB',cat:'Rebounding'},
+  {k:'opp2nd',l:'Opp 2nd Chance',cat:'Rebounding'},
+  {k:'missedBox',l:'Missed Boxouts',cat:'Rebounding'},
+  {k:'oppOpen3Att',l:'Opp Open 3 Att',cat:'3-Point'},
+  {k:'oppOpen3Made',l:'Opp Open 3 Made',cat:'3-Point'},
+  {k:'oppPaintPts',l:'Opp Paint Pts',cat:'Paint'},
+  {k:'stops',l:'Stops',cat:'General'}
+];
+
+var PSTATS=[{k:'fouls',l:'Fouls'},{k:'boxout',l:'Boxout'},{k:'ballTouch',l:'Ball Touch'},{k:'trans',l:'Trans'}];
+
+var NAMES={1:'Taylah Levy',4:'Grace Blackwood',6:'Sally Faehrmann',8:'Maja Peric',9:'Isabella De Jesus',10:'Jennifer Mailei',11:'Ai Matsumoto',14:'Llianna Jacob',17:'Alana Dalgleish',18:'Mowa Ohunayo',25:'Mizuki Wakamatsu',40:'Lahoi-Roi Igiraneza',44:'Serbia Ridard'};
+
+var Q=1,TAB='offense',onCourt=[1,4,6,8,9],subSlot=-1,resetConfirm=false;
+
+var teamData={},playerData={};
+for(var q=1;q<=5;q++){
+  teamData[q]={};
+  OFF.concat(DEF).forEach(function(s){teamData[q][s.k]=0;});
+  playerData[q]={};
   PLAYERS.forEach(function(p){
-    playerData[q][p.num] = {};
-    PSTATS.forEach(function(s){ playerData[q][p.num][s.k] = 0; });
+    playerData[q][p.num]={};
+    PSTATS.forEach(function(s){playerData[q][p.num][s.k]=0;});
   });
 }
 
-// Load saved
-try {
-  var sv = JSON.parse(localStorage.getItem('nbl1v3') || 'null');
-  if (sv) {
-    if (sv.names) NAMES = sv.names;
-    if (sv.onCourt) onCourt = sv.onCourt;
-    if (sv.team) document.getElementById('teamName').value = sv.team;
-    if (sv.opp) document.getElementById('oppName').value = sv.opp;
+try{
+  var sv=JSON.parse(localStorage.getItem('nbl1v3')||'null');
+  if(sv){
+    if(sv.names)NAMES=sv.names;
+    if(sv.onCourt)onCourt=sv.onCourt;
+    if(sv.team)document.getElementById('teamName').value=sv.team;
+    if(sv.opp)document.getElementById('oppName').value=sv.opp;
   }
-} catch(e) {}
+}catch(e){}
 
-function save() {
-  try {
-    localStorage.setItem('nbl1v3', JSON.stringify({
-      names: NAMES, onCourt: onCourt,
-      team: document.getElementById('teamName').value,
-      opp: document.getElementById('oppName').value
-    }));
-  } catch(e) {}
+function save(){
+  try{localStorage.setItem('nbl1v3',JSON.stringify({names:NAMES,onCourt:onCourt,team:document.getElementById('teamName').value,opp:document.getElementById('oppName').value}));}catch(e){}
 }
 
-// ── Quarter bar ───────────────────────────────────────
-function buildQBar() {
-  var bar = document.getElementById('qbar');
-  bar.innerHTML = '';
-  ['Q1','Q2','Q3','Q4','OT'].forEach(function(l, i) {
-    var b = document.createElement('button');
-    b.className = 'qbtn' + (Q === i+1 ? ' on' : '');
-    b.textContent = l;
-    b.addEventListener('click', function(){ Q = i+1; buildQBar(); render(); });
+function shortName(num){var n=NAMES[num]||('#'+num);return n.split(' ')[0];}
+
+function buildQBar(){
+  var bar=document.getElementById('qbar');
+  bar.innerHTML='';
+  ['Q1','Q2','Q3','Q4','OT'].forEach(function(l,i){
+    var b=document.createElement('button');
+    b.className='qbtn'+(Q===i+1?' on':'');
+    b.textContent=l;
+    b.addEventListener('click',function(){Q=i+1;buildQBar();render();});
     bar.appendChild(b);
   });
 }
 
-// ── Tab switching ─────────────────────────────────────
-function setTab(tab) {
-  TAB = tab;
+function setTab(tab){
+  TAB=tab;
   ['offense','defense','players','summary'].forEach(function(t){
-    document.getElementById('nb-'+t).classList.toggle('on', t === tab);
+    document.getElementById('nb-'+t).classList.toggle('on',t===tab);
   });
   render();
 }
-document.getElementById('nb-offense').addEventListener('click', function(){ setTab('offense'); });
-document.getElementById('nb-defense').addEventListener('click', function(){ setTab('defense'); });
-document.getElementById('nb-players').addEventListener('click', function(){ setTab('players'); });
-document.getElementById('nb-summary').addEventListener('click', function(){ setTab('summary'); });
+document.getElementById('nb-offense').addEventListener('click',function(){setTab('offense');});
+document.getElementById('nb-defense').addEventListener('click',function(){setTab('defense');});
+document.getElementById('nb-players').addEventListener('click',function(){setTab('players');});
+document.getElementById('nb-summary').addEventListener('click',function(){setTab('summary');});
 
-// ── Helpers ───────────────────────────────────────────
-function shortName(num) {
-  var n = NAMES[num] || ('#'+num);
-  return n.split(' ')[0];
-}
-
-function makeCourtStrip(withPlayerStats) {
-  var div = document.createElement('div');
-  div.className = 'court';
-
-  // Slot row
-  var row = document.createElement('div');
-  row.className = 'court-row';
-  for (var i = 0; i < 5; i++) {
-    (function(idx) {
-      var num = onCourt[idx];
-      var slot = document.createElement('div');
-      slot.className = 'slot';
-      slot.innerHTML =
-        '<div class="slot-num">' + (num !== null ? num : '?') + '</div>' +
-        '<div class="slot-name">' + (num !== null ? shortName(num) : '—') + '</div>' +
-        '<div class="slot-arr">▾</div>';
-      slot.addEventListener('click', function(){ openSub(idx); });
+function makeCourtStrip(withPlayerStats){
+  var div=document.createElement('div');
+  div.className='court';
+  var row=document.createElement('div');
+  row.className='court-row';
+  for(var i=0;i<5;i++){
+    (function(idx){
+      var num=onCourt[idx];
+      var slot=document.createElement('div');
+      slot.className='slot';
+      slot.innerHTML='<div class="slot-num">'+(num!==null?num:'?')+'</div><div class="slot-name">'+(num!==null?shortName(num):'—')+'</div><div class="slot-arr">▾</div>';
+      slot.addEventListener('click',function(){openSub(idx);});
       row.appendChild(slot);
     })(i);
   }
   div.appendChild(row);
-
-  if (withPlayerStats) {
-    // Per-player stat rows
-    for (var i = 0; i < 5; i++) {
-      (function(idx) {
-        var num = onCourt[idx];
-        if (num === null) return;
-        var prow = document.createElement('div');
-        prow.className = 'prow';
-        var nameEl = document.createElement('div');
-        nameEl.className = 'prow-name';
-        nameEl.textContent = '#' + num + ' ' + shortName(num);
+  if(withPlayerStats){
+    for(var i=0;i<5;i++){
+      (function(idx){
+        var num=onCourt[idx];
+        if(num===null)return;
+        var prow=document.createElement('div');
+        prow.className='prow';
+        var nameEl=document.createElement('div');
+        nameEl.className='prow-name';
+        nameEl.textContent='#'+num+' '+shortName(num);
         prow.appendChild(nameEl);
-        var statsRow = document.createElement('div');
-        statsRow.className = 'prow-stats';
-        PSTATS.forEach(function(s) {
-          statsRow.appendChild(makeMiniStat(num, s));
-        });
-        prow.appendChild(statsRow);
+        var sr=document.createElement('div');
+        sr.className='prow-stats';
+        PSTATS.forEach(function(s){sr.appendChild(makeMiniStat(num,s));});
+        prow.appendChild(sr);
         div.appendChild(prow);
       })(i);
     }
   }
-
   return div;
 }
 
-function makeMiniStat(num, s) {
-  var val = playerData[Q][num][s.k];
-  var wrap = document.createElement('div');
-  wrap.className = 'mstat';
-  var lbl = document.createElement('div');
-  lbl.className = 'mlbl';
-  lbl.textContent = s.l;
-  var ctr = document.createElement('div');
-  ctr.className = 'mctr';
-  var minus = document.createElement('button');
-  minus.className = 'mbtn';
-  minus.textContent = '−';
-  var valEl = document.createElement('div');
-  valEl.className = 'mval' + (s.k === 'fouls' && val >= 5 ? ' red' : '');
-  valEl.textContent = val;
-  var plus = document.createElement('button');
-  plus.className = 'mbtn';
-  plus.textContent = '+';
-
-  function update(delta) {
-    playerData[Q][num][s.k] = Math.max(0, playerData[Q][num][s.k] + delta);
-    var v = playerData[Q][num][s.k];
-    valEl.textContent = v;
-    valEl.className = 'mval' + (s.k === 'fouls' && v >= 5 ? ' red' : '');
-  }
-  minus.addEventListener('click', function(){ update(-1); });
-  plus.addEventListener('click', function(){ update(1); });
-  ctr.appendChild(minus); ctr.appendChild(valEl); ctr.appendChild(plus);
-  wrap.appendChild(lbl); wrap.appendChild(ctr);
+function makeMiniStat(num,s){
+  var wrap=document.createElement('div');
+  wrap.className='mstat';
+  var lbl=document.createElement('div');
+  lbl.className='mlbl';
+  lbl.textContent=s.l;
+  var ctr=document.createElement('div');
+  ctr.className='mctr';
+  var minus=document.createElement('button');
+  minus.className='mbtn';
+  minus.textContent='−';
+  var valEl=document.createElement('div');
+  valEl.className='mval'+(s.k==='fouls'&&playerData[Q][num][s.k]>=5?' red':'');
+  valEl.textContent=playerData[Q][num][s.k];
+  var plus=document.createElement('button');
+  plus.className='mbtn';
+  plus.textContent='+';
+  minus.addEventListener('click',function(){
+    playerData[Q][num][s.k]=Math.max(0,playerData[Q][num][s.k]-1);
+    var v=playerData[Q][num][s.k];
+    valEl.textContent=v;
+    valEl.className='mval'+(s.k==='fouls'&&v>=5?' red':'');
+  });
+  plus.addEventListener('click',function(){
+    playerData[Q][num][s.k]++;
+    var v=playerData[Q][num][s.k];
+    valEl.textContent=v;
+    valEl.className='mval'+(s.k==='fouls'&&v>=5?' red':'');
+  });
+  ctr.appendChild(minus);ctr.appendChild(valEl);ctr.appendChild(plus);
+  wrap.appendChild(lbl);wrap.appendChild(ctr);
   return wrap;
 }
 
-function makeStatGrid(stats) {
-  var grid = document.createElement('div');
-  grid.className = 'sgrid';
-  stats.forEach(function(s) {
-    var card = document.createElement('div');
-    card.className = 'scard';
-    var name = document.createElement('div');
-    name.className = 'sname';
-    name.textContent = s.l;
-    var ctr = document.createElement('div');
-    ctr.className = 'ctr';
-    var minus = document.createElement('button');
-    minus.className = 'cbtn';
-    minus.textContent = '−';
-    var valEl = document.createElement('div');
-    valEl.className = 'cval';
-    valEl.textContent = teamData[Q][s.k];
-    var plus = document.createElement('button');
-    plus.className = 'cbtn';
-    plus.textContent = '+';
-    minus.addEventListener('click', function(){
-      teamData[Q][s.k] = Math.max(0, teamData[Q][s.k] - 1);
-      valEl.textContent = teamData[Q][s.k];
-    });
-    plus.addEventListener('click', function(){
-      teamData[Q][s.k]++;
-      valEl.textContent = teamData[Q][s.k];
-    });
-    ctr.appendChild(minus); ctr.appendChild(valEl); ctr.appendChild(plus);
-    card.appendChild(name); card.appendChild(ctr);
-    grid.appendChild(card);
-  });
-  return grid;
-}
-
-function makePlayerCard(num, isOnCourt) {
-  var card = document.createElement('div');
-  card.className = 'pcard';
-  var hdr = document.createElement('div');
-  hdr.className = 'pcard-hdr';
-  var numEl = document.createElement('div');
-  numEl.className = 'pnum' + (isOnCourt ? ' on' : '');
-  numEl.textContent = num;
-  var nameEl = document.createElement('div');
-  nameEl.className = 'pname';
-  nameEl.textContent = NAMES[num] || ('#'+num);
-  hdr.appendChild(numEl); hdr.appendChild(nameEl);
-  if (isOnCourt) {
-    var tag = document.createElement('span');
-    tag.className = 'on-tag';
-    tag.textContent = 'ON';
-    hdr.appendChild(tag);
-  }
-  card.appendChild(hdr);
-  var stats = document.createElement('div');
-  stats.className = 'prow-stats';
-  PSTATS.forEach(function(s){ stats.appendChild(makeMiniStat(num, s)); });
-  card.appendChild(stats);
+function makeStatCard(s){
+  var card=document.createElement('div');
+  card.className='scard';
+  var name=document.createElement('div');
+  name.className='sname';
+  name.textContent=s.l;
+  card.appendChild(name);
+  var ctr=document.createElement('div');
+  ctr.className='ctr';
+  var minus=document.createElement('button');
+  minus.className='cbtn';
+  minus.textContent='−';
+  var valEl=document.createElement('div');
+  valEl.className='cval';
+  valEl.textContent=teamData[Q][s.k];
+  var plus=document.createElement('button');
+  plus.className='cbtn';
+  plus.textContent='+';
+  minus.addEventListener('click',function(){teamData[Q][s.k]=Math.max(0,teamData[Q][s.k]-1);valEl.textContent=teamData[Q][s.k];});
+  plus.addEventListener('click',function(){teamData[Q][s.k]++;valEl.textContent=teamData[Q][s.k];});
+  ctr.appendChild(minus);ctr.appendChild(valEl);ctr.appendChild(plus);
+  card.appendChild(ctr);
   return card;
 }
 
-// ── Render ────────────────────────────────────────────
-function render() {
-  var c = document.getElementById('content');
-  c.innerHTML = '';
-  var ql = Q > 4 ? 'OT' : 'Q'+Q;
+function makeStatSection(stats){
+  var wrap=document.createElement('div');
+  var cats=[],catMap={};
+  stats.forEach(function(s){
+    var c=s.cat||'Other';
+    if(!catMap[c]){catMap[c]=[];cats.push(c);}
+    catMap[c].push(s);
+  });
+  cats.forEach(function(cat){
+    var lbl=document.createElement('div');
+    lbl.className='cat-lbl';
+    lbl.textContent=cat;
+    wrap.appendChild(lbl);
+    var grid=document.createElement('div');
+    grid.className='sgrid';
+    catMap[cat].forEach(function(s){grid.appendChild(makeStatCard(s));});
+    wrap.appendChild(grid);
+  });
+  return wrap;
+}
 
-  if (TAB === 'offense') {
-    var lbl = document.createElement('div');
-    lbl.className = 'lbl';
-    lbl.textContent = 'On Court — tap ▾ to sub';
-    c.appendChild(lbl);
+function makePlayerCard(num,isOnCourt){
+  var card=document.createElement('div');
+  card.className='pcard';
+  var hdr=document.createElement('div');
+  hdr.className='pcard-hdr';
+  var numEl=document.createElement('div');
+  numEl.className='pnum'+(isOnCourt?' on':'');
+  numEl.textContent=num;
+  var nameEl=document.createElement('div');
+  nameEl.className='pname';
+  nameEl.textContent=NAMES[num]||('#'+num);
+  hdr.appendChild(numEl);hdr.appendChild(nameEl);
+  if(isOnCourt){var tag=document.createElement('span');tag.className='on-tag';tag.textContent='ON';hdr.appendChild(tag);}
+  card.appendChild(hdr);
+  var sr=document.createElement('div');
+  sr.className='prow-stats';
+  PSTATS.forEach(function(s){sr.appendChild(makeMiniStat(num,s));});
+  card.appendChild(sr);
+  return card;
+}
+
+function render(){
+  var c=document.getElementById('content');
+  c.innerHTML='';
+  var ql=Q>4?'OT':'Q'+Q;
+
+  if(TAB==='offense'){
+    var l=document.createElement('div');l.className='lbl';l.textContent='On Court — tap ▾ to sub';c.appendChild(l);
     c.appendChild(makeCourtStrip(true));
-    var lbl2 = document.createElement('div');
-    lbl2.className = 'lbl';
-    lbl2.textContent = 'Offense Stats — ' + ql;
-    c.appendChild(lbl2);
-    c.appendChild(makeStatGrid(OFF));
+    var l2=document.createElement('div');l2.className='lbl';l2.textContent='Offense Stats — '+ql;c.appendChild(l2);
+    c.appendChild(makeStatSection(OFF));
   }
 
-  if (TAB === 'defense') {
-    var lbl = document.createElement('div');
-    lbl.className = 'lbl';
-    lbl.textContent = 'On Court — tap ▾ to sub';
-    c.appendChild(lbl);
+  if(TAB==='defense'){
+    var l=document.createElement('div');l.className='lbl';l.textContent='On Court — tap ▾ to sub';c.appendChild(l);
     c.appendChild(makeCourtStrip(false));
-    var lbl2 = document.createElement('div');
-    lbl2.className = 'lbl';
-    lbl2.textContent = 'Defense Stats — ' + ql;
-    c.appendChild(lbl2);
-    c.appendChild(makeStatGrid(DEF));
+    var l2=document.createElement('div');l2.className='lbl';l2.textContent='Defense Stats — '+ql;c.appendChild(l2);
+    c.appendChild(makeStatSection(DEF));
   }
 
-  if (TAB === 'players') {
-    var lbl = document.createElement('div');
-    lbl.className = 'lbl';
-    lbl.textContent = 'On Court';
-    c.appendChild(lbl);
-    for (var i = 0; i < 5; i++) {
-      var num = onCourt[i];
-      if (num !== null) c.appendChild(makePlayerCard(num, true));
-    }
-    var bench = PLAYERS.filter(function(p){ return onCourt.indexOf(p.num) === -1; });
-    if (bench.length) {
-      var lbl2 = document.createElement('div');
-      lbl2.className = 'lbl';
-      lbl2.style.marginTop = '8px';
-      lbl2.textContent = 'Bench';
-      c.appendChild(lbl2);
-      bench.forEach(function(p){ c.appendChild(makePlayerCard(p.num, false)); });
+  if(TAB==='players'){
+    var l=document.createElement('div');l.className='lbl';l.textContent='On Court';c.appendChild(l);
+    for(var i=0;i<5;i++){var num=onCourt[i];if(num!==null)c.appendChild(makePlayerCard(num,true));}
+    var bench=PLAYERS.filter(function(p){return onCourt.indexOf(p.num)===-1;});
+    if(bench.length){
+      var l2=document.createElement('div');l2.className='lbl';l2.style.marginTop='8px';l2.textContent='Bench';c.appendChild(l2);
+      bench.forEach(function(p){c.appendChild(makePlayerCard(p.num,false));});
     }
   }
 
-  if (TAB === 'summary') {
-    var qs = [1,2,3,4,5];
-    var qls = ['Q1','Q2','Q3','Q4','OT'];
-
-    function makeTable(stats, title) {
-      var wrap = document.createElement('div');
-      wrap.className = 'twrap';
-      var tbl = document.createElement('table');
-      tbl.className = 'stbl';
-      var thead = '<thead><tr><th>Metric</th>' + qls.map(function(l){return '<th>'+l+'</th>';}).join('') + '<th>Total</th></tr></thead>';
-      var tbody = '<tbody><tr class="tdiv"><td colspan="7">▸ '+title+'</td></tr>';
+  if(TAB==='summary'){
+    var qs=[1,2,3,4,5],qls=['Q1','Q2','Q3','Q4','OT'];
+    function makeTable(stats,title){
+      var wrap=document.createElement('div');wrap.className='twrap';
+      var tbl=document.createElement('table');tbl.className='stbl';
+      var h='<thead><tr><th>Metric</th>'+qls.map(function(l){return '<th>'+l+'</th>';}).join('')+'<th>Total</th></tr></thead><tbody>';
+      h+='<tr class="tdiv"><td colspan="7">▸ '+title+'</td></tr>';
       stats.forEach(function(s){
-        var vals = qs.map(function(q){ return teamData[q][s.k]||0; });
-        var tot = vals.reduce(function(a,b){return a+b;},0);
-        tbody += '<tr><td>'+s.l+'</td>'+vals.map(function(v){return '<td>'+v+'</td>';}).join('')+'<td class="ttotal">'+tot+'</td></tr>';
+        var vals=qs.map(function(q){return teamData[q][s.k]||0;});
+        var tot=vals.reduce(function(a,b){return a+b;},0);
+        h+='<tr><td>'+s.l+'</td>'+vals.map(function(v){return '<td>'+v+'</td>';}).join('')+'<td class="ttotal">'+tot+'</td></tr>';
       });
-      tbody += '</tbody>';
-      tbl.innerHTML = thead + tbody;
-      wrap.appendChild(tbl);
-      return wrap;
+      h+='</tbody>';tbl.innerHTML=h;wrap.appendChild(tbl);return wrap;
     }
-
-    var lbl = document.createElement('div'); lbl.className='lbl'; lbl.textContent='Full Game Summary'; c.appendChild(lbl);
-    c.appendChild(makeTable(OFF, 'Offense'));
-    c.appendChild(makeTable(DEF, 'Defense'));
-
-    var lbl2 = document.createElement('div'); lbl2.className='lbl'; lbl2.style.marginTop='10px'; lbl2.textContent='Player Totals'; c.appendChild(lbl2);
-    var wrap2 = document.createElement('div'); wrap2.className='twrap';
-    var tbl2 = document.createElement('table'); tbl2.className='stbl';
-    var h2 = '<thead><tr><th>#</th><th>Name</th>'+PSTATS.map(function(s){return '<th>'+s.l+'</th>';}).join('')+'</tr></thead><tbody>';
+    var l=document.createElement('div');l.className='lbl';l.textContent='Full Game Summary';c.appendChild(l);
+    c.appendChild(makeTable(OFF,'Offense'));
+    c.appendChild(makeTable(DEF,'Defense'));
+    var l2=document.createElement('div');l2.className='lbl';l2.style.marginTop='10px';l2.textContent='Player Totals';c.appendChild(l2);
+    var wrap2=document.createElement('div');wrap2.className='twrap';
+    var tbl2=document.createElement('table');tbl2.className='stbl';
+    var h2='<thead><tr><th>#</th><th>Name</th>'+PSTATS.map(function(s){return '<th>'+s.l+'</th>';}).join('')+'</tr></thead><tbody>';
     PLAYERS.forEach(function(p){
-      var tots = PSTATS.map(function(s){ return qs.reduce(function(sum,q){return sum+playerData[q][p.num][s.k];},0); });
-      var isOn = onCourt.indexOf(p.num) !== -1;
-      h2 += '<tr><td style="color:var(--accent)">'+p.num+'</td><td>'+(NAMES[p.num]||'—')+(isOn?' ●':'')+' </td>'+tots.map(function(v,i){return '<td'+(PSTATS[i].k==='fouls'&&v>=5?' class="red"':'')+'>'+v+'</td>';}).join('')+'</tr>';
+      var tots=PSTATS.map(function(s){return qs.reduce(function(sum,q){return sum+playerData[q][p.num][s.k];},0);});
+      var isOn=onCourt.indexOf(p.num)!==-1;
+      h2+='<tr><td style="color:var(--accent)">'+p.num+'</td><td>'+(NAMES[p.num]||'—')+(isOn?' ●':'')+'</td>'+tots.map(function(v,i){return '<td'+(PSTATS[i].k==='fouls'&&v>=5?' class="red"':'')+'>'+v+'</td>';}).join('')+'</tr>';
     });
-    h2 += '</tbody>';
-    tbl2.innerHTML = h2;
-    wrap2.appendChild(tbl2);
-    c.appendChild(wrap2);
+    h2+='</tbody>';tbl2.innerHTML=h2;wrap2.appendChild(tbl2);c.appendChild(wrap2);
   }
 }
 
-// ── Sub overlay ───────────────────────────────────────
-function openSub(idx) {
-  subSlot = idx;
-  var cur = onCourt[idx];
-  document.getElementById('subSub').textContent = 'Subbing: ' + (cur !== null ? (NAMES[cur]||'#'+cur) : 'Empty slot');
-  var list = document.getElementById('pickList');
-  list.innerHTML = '';
-  PLAYERS.forEach(function(p) {
-    var isOn = onCourt.indexOf(p.num) !== -1;
-    var isCur = p.num === cur;
-    var row = document.createElement('div');
-    row.className = 'pick-row' + (isCur ? ' cur' : '');
-    row.innerHTML =
-      '<div class="pick-num">'+p.num+'</div>' +
-      '<div class="pick-name">'+(NAMES[p.num]||'#'+p.num)+'</div>' +
-      (isCur ? '<div class="pick-tag">CURRENT</div>' : (isOn ? '<div class="pick-tag">ON</div>' : ''));
-    row.addEventListener('click', function() {
-      var newNum = p.num;
-      var otherIdx = onCourt.indexOf(newNum);
-      if (otherIdx !== -1 && otherIdx !== subSlot) {
-        onCourt[otherIdx] = onCourt[subSlot];
-      }
-      onCourt[subSlot] = newNum;
+function openSub(idx){
+  subSlot=idx;
+  var cur=onCourt[idx];
+  document.getElementById('subSub').textContent='Subbing: '+(cur!==null?(NAMES[cur]||'#'+cur):'Empty slot');
+  var list=document.getElementById('pickList');
+  list.innerHTML='';
+  PLAYERS.forEach(function(p){
+    var isOn=onCourt.indexOf(p.num)!==-1;
+    var isCur=p.num===cur;
+    var row=document.createElement('div');
+    row.className='pick-row'+(isCur?' cur':'');
+    row.innerHTML='<div class="pick-num">'+p.num+'</div><div class="pick-name">'+(NAMES[p.num]||'#'+p.num)+'</div>'+(isCur?'<div class="pick-tag">CURRENT</div>':(isOn?'<div class="pick-tag">ON</div>':''));
+    row.addEventListener('click',function(){
+      var newNum=p.num;
+      var otherIdx=onCourt.indexOf(newNum);
+      if(otherIdx!==-1&&otherIdx!==subSlot)onCourt[otherIdx]=onCourt[subSlot];
+      onCourt[subSlot]=newNum;
       save();
       document.getElementById('subOv').classList.add('hidden');
       render();
@@ -544,55 +456,37 @@ function openSub(idx) {
   });
   document.getElementById('subOv').classList.remove('hidden');
 }
-document.getElementById('cancelSub').addEventListener('click', function(){
-  document.getElementById('subOv').classList.add('hidden');
-});
+document.getElementById('cancelSub').addEventListener('click',function(){document.getElementById('subOv').classList.add('hidden');});
 
-// ── Setup overlay ─────────────────────────────────────
-document.getElementById('setupBtn').addEventListener('click', function(){
-  var grid = document.getElementById('pgrid');
-  grid.innerHTML = '';
+document.getElementById('setupBtn').addEventListener('click',function(){
+  var grid=document.getElementById('pgrid');
+  grid.innerHTML='';
   PLAYERS.forEach(function(p){
-    var row = document.createElement('div');
-    row.className = 'prow2';
-    var badge = document.createElement('div');
-    badge.className = 'nbadge';
-    badge.textContent = p.num;
-    var inp = document.createElement('input');
-    inp.type = 'text';
-    inp.placeholder = 'Player name';
-    inp.value = NAMES[p.num] || '';
-    inp.addEventListener('input', function(){ NAMES[p.num] = this.value; });
-    row.appendChild(badge); row.appendChild(inp);
-    grid.appendChild(row);
+    var row=document.createElement('div');row.className='prow2';
+    var badge=document.createElement('div');badge.className='nbadge';badge.textContent=p.num;
+    var inp=document.createElement('input');inp.type='text';inp.placeholder='Player name';inp.value=NAMES[p.num]||'';
+    inp.addEventListener('input',function(){NAMES[p.num]=this.value;});
+    row.appendChild(badge);row.appendChild(inp);grid.appendChild(row);
   });
   document.getElementById('setupOv').classList.remove('hidden');
 });
-document.getElementById('doneSetup').addEventListener('click', function(){
-  save();
-  document.getElementById('setupOv').classList.add('hidden');
-  render();
-});
+document.getElementById('doneSetup').addEventListener('click',function(){save();document.getElementById('setupOv').classList.add('hidden');render();});
 
-// ── Reset ─────────────────────────────────────────────
-document.getElementById('resetBtn').addEventListener('click', function(){
-  var btn = this;
-  if (!resetConfirm) {
-    resetConfirm = true;
-    btn.textContent = 'Tap again to confirm';
-    btn.style.color = 'var(--accent)';
-    setTimeout(function(){ resetConfirm=false; btn.textContent='Reset Quarter'; btn.style.color=''; }, 3000);
+document.getElementById('resetBtn').addEventListener('click',function(){
+  var btn=this;
+  if(!resetConfirm){
+    resetConfirm=true;btn.textContent='Tap again to confirm';btn.style.color='var(--accent)';
+    setTimeout(function(){resetConfirm=false;btn.textContent='Reset Quarter';btn.style.color='';},3000);
     return;
   }
-  resetConfirm = false; btn.textContent='Reset Quarter'; btn.style.color='';
-  OFF.concat(DEF).forEach(function(s){ teamData[Q][s.k]=0; });
-  PLAYERS.forEach(function(p){ PSTATS.forEach(function(s){ playerData[Q][p.num][s.k]=0; }); });
+  resetConfirm=false;btn.textContent='Reset Quarter';btn.style.color='';
+  OFF.concat(DEF).forEach(function(s){teamData[Q][s.k]=0;});
+  PLAYERS.forEach(function(p){PSTATS.forEach(function(s){playerData[Q][p.num][s.k]=0;});});
   render();
 });
 
-// ── Export ────────────────────────────────────────────
-document.getElementById('exportBtn').addEventListener('click', function(){
-  var qs=[1,2,3,4,5]; var qls=['Q1','Q2','Q3','Q4','OT'];
+document.getElementById('exportBtn').addEventListener('click',function(){
+  var qs=[1,2,3,4,5],qls=['Q1','Q2','Q3','Q4','OT'];
   var team=document.getElementById('teamName').value||'Us';
   var opp=document.getElementById('oppName').value||'Opponent';
   var date=new Date().toLocaleDateString('en-AU');
@@ -608,15 +502,14 @@ document.getElementById('exportBtn').addEventListener('click', function(){
   document.getElementById('exportTxt').value=t;
   document.getElementById('exportOv').classList.remove('hidden');
 });
-document.getElementById('closeExport').addEventListener('click', function(){ document.getElementById('exportOv').classList.add('hidden'); });
-document.getElementById('copyBtn').addEventListener('click', function(){
-  var el=document.getElementById('exportTxt'); el.select();
+document.getElementById('closeExport').addEventListener('click',function(){document.getElementById('exportOv').classList.add('hidden');});
+document.getElementById('copyBtn').addEventListener('click',function(){
+  var el=document.getElementById('exportTxt');el.select();
   var btn=document.getElementById('copyBtn');
   try{navigator.clipboard.writeText(el.value).then(function(){btn.textContent='Copied!';setTimeout(function(){btn.textContent='Copy All';},2000);});}
   catch(e){document.execCommand('copy');btn.textContent='Copied!';setTimeout(function(){btn.textContent='Copy All';},2000);}
 });
 
-// ── Init ──────────────────────────────────────────────
 buildQBar();
 render();
 </script>
